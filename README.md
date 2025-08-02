@@ -62,6 +62,10 @@ Update the following in `appsettings.json` or as environment variables:
   "Deployment": "your-model-deployment",
   "ApiVersion": "2024-05-01-preview"
 }
+"Redis": {
+  "Host": "localhost:6379",
+  "InstanceName": "AgentCopilot:"
+}
 ```
 
 ### 3. Run with Docker
