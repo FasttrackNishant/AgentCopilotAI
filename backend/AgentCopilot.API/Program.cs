@@ -1,4 +1,5 @@
 using AgentCopilot.API.AgentHub;
+using AgentCopilot.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddSignalR();
 builder.Services.AddHttpClient();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<RedisService>();
 
 builder.Services.AddCors(options =>
 {

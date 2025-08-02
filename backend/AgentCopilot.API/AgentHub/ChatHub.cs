@@ -1,33 +1,34 @@
+using AgentCopilot.API.Services;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AgentCopilot.API.AgentHub;
 public class ChatHub : Hub
 {
+    private readonly RedisService _redis;
+
+    public ChatHub(RedisService redisService)
+    {
+        _redis = redisService;
+    }
     public async Task JoinChat(string chatId)
     {
         Console.WriteLine($"Joining: {Context.ConnectionId} to {chatId}");
         await Groups.AddToGroupAsync(Context.ConnectionId, chatId);
     }
 
-    public async Task SendMessage(string chatId, string sender, string message,string timestamp)
+    public async Task SendMessage(string chatId, string sender, string message, string timestamp)
     {
         Console.WriteLine($"[{sender}] sending to group {chatId}: {message}");
 
-        var msg = new ChatMessage
-        {
-            Sender = sender,
-            Message = message,
-            TimeStamp = timestamp
-        };
 
-        if (!ChatMemoryStore.ChatMessages.ContainsKey(chatId))
-        {
-            ChatMemoryStore.ChatMessages[chatId] = new List<ChatMessage>();
-        }
+        await Clients.Group(chatId).SendAsync("ReceiveMessage", sender, message, timestamp);
 
-        ChatMemoryStore.ChatMessages[chatId].Add(msg);
+        await _redis.SaveMessageAsync(chatId, sender, message);
+    }
 
-        await Clients.Group(chatId).SendAsync("ReceiveMessage", sender, message,timestamp);
+    public async Task<List<string>> LoadHistory(string chatId)
+    {
+        return await _redis.GetMessagesAsync(chatId);
     }
 
     public override Task OnConnectedAsync()

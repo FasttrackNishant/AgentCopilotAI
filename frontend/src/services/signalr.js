@@ -42,6 +42,8 @@ export const startConnection = async (chatId, onMessageReceived) => {
 	} catch (err) {
 		console.error('SignalR start/join failed:', err);
 	}
+
+	return connection;
 };
 
 export const sendMessage = async (chatId, sender, message,timestamp) => {

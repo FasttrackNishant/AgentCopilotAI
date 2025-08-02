@@ -1,11 +1,17 @@
 namespace AgentCopilot.API.AgentHub;
 
+using System.Text.Json.Serialization;
+
 public class ChatMessage
 {
-    public string Sender { get; set; }
-    public string Message { get; set; }
-    public string TimeStamp { get; set; }
+    [JsonPropertyName("sender")]
+    public string Sender { get; set; } = string.Empty;
 
+    [JsonPropertyName("message")]
+    public string Message { get; set; } = string.Empty;
+
+    [JsonPropertyName("timestamp")]
+    public string Timestamp { get; set; } = string.Empty;
 }
 
 public static class ChatMemoryStore
