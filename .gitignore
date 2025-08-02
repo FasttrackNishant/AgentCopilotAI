@@ -1,0 +1,81 @@
+# ======== .NET / C# ========
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build Results
+*.dll
+*.exe
+*.app
+*.log
+*.pdb
+*.cache
+*.csproj.user
+
+# dotnet-specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Secrets
+secrets.json
+*.appsettings.Development.json
+appsettings.Local.json
+.env
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# JetBrains Rider
+.idea/
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.swp
+*.tmp
+
+# nuget
+*.nupkg
+packages/
+.nuget/
+
+# coverage reports
+coverage/
+*.lcov
+
+# ======== React Frontend (in /client or /frontend) ========
+# Node modules
+node_modules/
+
+# Build files
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*.local
+
+# Mac system files
+*.DS_Store
+
+# Editor settings
+*.log
+*.tgz
+backend/AgentCopilot.API/appsettings.json
+backend/AgentCopilot.API/appsettings.Development.json
